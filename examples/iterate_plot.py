@@ -1,5 +1,6 @@
 #
-# Bit Error Rate Performance Plot
+# Log-likelihood Ratio Plot
+# Illustrates how the decoder improves its confidence
 #
 
 #!/usr/bin/env python3
