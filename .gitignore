@@ -1,0 +1,11 @@
+#
+# Generated Python directories
+#
+build/*
+dist/*
+pyturbo.egg-info/*
+
+#
+# Generated Python Files
+#
+*.pyc
