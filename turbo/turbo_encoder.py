@@ -19,7 +19,7 @@ class TurboEncoder:
         return interleaved
 
     def execute(self, vector):
-        if not (len(vector) % self.block_size):
+        if (len(vector) % self.block_size) != 0:
             raise ValueError(""" Turbo encoder expects vector size to be a
                                  multiple of the interleaver (block size) """)
 
