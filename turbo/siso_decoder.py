@@ -6,8 +6,7 @@ import math
 import itertools
 import numpy as np
 
-from turbo_encoder import TurboEncoder
-from awgn import AWGN
+from .awgn import AWGN
 
 
 def butterfly(path_metrics, branch_metrics):

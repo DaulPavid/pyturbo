@@ -2,7 +2,7 @@
 # Turbo Encoder
 #
 
-from rsc import RSC
+from .rsc import RSC
 
 
 class TurboEncoder:
