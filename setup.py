@@ -4,6 +4,12 @@
 
 from setuptools import setup
 
+
+install_requires = []
+with open("requirements.txt") as f:
+    install_requires = f.read().splitlines()
+
+
 setup(
     name="pyturbo",
     version="0.10",
@@ -12,6 +18,7 @@ setup(
     license="MIT",
     description="A simple implementation of a turbo encoder and decoder",
     packages=["turbo"],
+    install_requires=install_requires,
     classifiers=[
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',

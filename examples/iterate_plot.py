@@ -5,14 +5,16 @@
 
 #!/usr/bin/env python3
 
+import argparse
 import matplotlib.pyplot as Plot
 
 from turbo import TurboEncoder
 from turbo import AWGN
 from turbo import TurboDecoder
+from turbo import SISODecoder
 
 
-def create_ber_plot(input_vector, SNR_dB):
+def create_ber_plot(input_vector, SNR_dB, decoder):
     pass
 
 
@@ -32,6 +34,10 @@ def options():
         "-r", "--rate", type=int,
         default=3,
         help="Setting a rate 1/r code"
+    )
+    parser.add_argument(
+        "--siso",
+        help="Use only a single SISO (MAP) decoder"
     )
     return parser.parse_args()
 

@@ -17,13 +17,13 @@ def create_awgn_plot(input_vector, SNR_dB):
 
     plot.subplot(1, 2, 1)
     plot.plot(input_vector, 'b.')
-    plot.title("input_vector")
+    plot.title("Input Vector (BPSK)")
 
     output_vector = channel.execute(input_vector)
 
     plot.subplot(1, 2, 2)
     plot.plot(output_vector, 'r.')
-    plot.title("output_vector")
+    plot.title("Channel Output (BPSK + AWGN)")
     plot.show()
 
 
