@@ -6,41 +6,70 @@
 #!/usr/bin/env python3
 
 import argparse
-import matplotlib.pyplot as Plot
+import random
+import numpy as np
+import matplotlib.pyplot as plot
 
 from turbo import TurboEncoder
 from turbo import AWGN
 from turbo import TurboDecoder
-from turbo import SISODecoder
 
 
-def create_ber_plot(input_vector, SNR_dB, decoder):
-    pass
+def create_ber_plot(plot_params):
+    snr = plot_params["snr"]
+    block_size = plot_params["block_size"]
+    max_iter = plot_params["max_iter"]
+
+    interleaver = random.sample(range(0, block_size), block_size)
+    encoder = TurboEncoder(interleaver)
+    decoder = TurboDecoder(interleaver)
+
+    input_vector = np.random.randint(2, size=block_size)
+    encoded_vector = encoder.execute(input_vector)
+
+    channel = AWGN(snr)
+
+    channel_vector = list(map(float, encoded_vector))
+    channel_vector = channel.convert_to_symbols(encoded_vector)
+
+    channel_vector = channel.execute(channel_vector)
+
+    for i in range(max_iter):
+        decoder.iterate(channel_vector)
+        plot.plot(decoder.LLR_ext[:block_size], '.', label="Iteration {}".format(i+1))
+
+    plot.title("Turbo Decoder Iterations")
+    plot.ylabel("Soft Bits")
+    plot.xlabel("Bits")
+    plot.legend()
+    plot.show()
 
 
 def options():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-s", "--snr", type=float,
-        default=5.0,
+        default=2.0,
         help="SNR [dB] in an AWGN channel"
     )
     parser.add_argument(
-        "-i", "--input", nargs="+", type=int,
-        default=10 * [1, 1, 0, 0, 1, 0, 1, 0, 1, 1],
-        help="Input vector to the AWGN channel"
+        "--block-size", type=int,
+        default=50,
+        help="Block size (size of interleaver)"
     )
     parser.add_argument(
-        "-r", "--rate", type=int,
-        default=3,
-        help="Setting a rate 1/r code"
-    )
-    parser.add_argument(
-        "--siso",
-        help="Use only a single SISO (MAP) decoder"
+        "--max-iter", type=int,
+        default=6,
+        help="Maximum iterations to run the turbo decoder"
     )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
-    pass
+    args = options()
+    plot_params = {
+        "snr": args.snr,
+        "block_size": args.block_size,
+        "max_iter": args.max_iter
+    }
+    create_ber_plot(plot_params)

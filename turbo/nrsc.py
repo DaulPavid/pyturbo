@@ -1,4 +1,0 @@
-#
-# Non-Recursive Systematic Encoder
-#
-

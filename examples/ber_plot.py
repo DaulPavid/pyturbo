@@ -34,13 +34,15 @@ def create_ber_plot(plot_params):
 
             channel = AWGN(snr_range[n])
 
-            encoded_vector = list(map(float, encoded_vector))
-            channel_vector = channel.convert_to_symbols(encoded_vector)
+            channel_vector = list(map(float, encoded_vector))
+            channel_vector = channel.convert_to_symbols(channel_vector)
 
             channel_vector = channel.execute(channel_vector)
 
             decoded_vector = decoder.execute(channel_vector)
             decoded_vector = [int(b > 0.0) for b in decoded_vector]
+
+            decoder.reset()
 
             error_count = sum([x ^ y for x, y in zip(input_vector, decoded_vector)])
             num_errors[n] = num_errors[n] + error_count
@@ -81,7 +83,6 @@ def options():
 
 if __name__ == "__main__":
     args = options()
-
     plot_params = {
         "snr": args.snr,
         "block_size": args.block_size,
