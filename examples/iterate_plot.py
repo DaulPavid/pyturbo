@@ -1,5 +1,5 @@
 #
-# Log-likelihood Ratio Plot
+# Log-likelihood Ratio (LLR) Iteration Plot
 # Illustrates how the decoder improves its confidence
 #
 
