@@ -41,6 +41,7 @@ def create_ber_plot(plot_params):
     plot.title("Turbo Decoder Iterations")
     plot.ylabel("Soft Bits")
     plot.xlabel("Bits")
+    plot.grid(b=True, which="major", linestyle="--")
     plot.legend()
     plot.show()
 
