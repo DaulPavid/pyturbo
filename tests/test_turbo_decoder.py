@@ -75,7 +75,6 @@ class TestTurboDecoder(unittest.TestCase):
         self.assertListEqual(list(encoded_vector[::3]), decoded_vector)
 
     def test_turbo_decoder(self):
-        self.skipTest("Not ready")
         interleaver = [9, 8, 5, 6, 2, 1, 7, 0, 3, 4]
         encoder = TurboEncoder(interleaver)
         decoder = TurboDecoder(interleaver)
