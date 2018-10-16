@@ -13,7 +13,7 @@ class AWGN:
         return np.add(np.multiply(vector, 2), -1)
 
     def __init__(self, noise_dB):
-        self.scale = 1.0 / (10.0**(noise_dB / 10.0))
+        self.scale = 1.0 / (10.0**(noise_dB / 20.0))
 
     def execute(self, vector):
         noise = np.random.normal(0, 1, len(vector))
