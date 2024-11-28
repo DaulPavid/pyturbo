@@ -12,7 +12,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="pyturbo",
-    version="0.10",
+    version="0.11",
     author="daulpavid",
     url="https://github.com/daulpavid/pyturbo",
     license="MIT",
